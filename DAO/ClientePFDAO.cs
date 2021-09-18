@@ -39,61 +39,66 @@ namespace DAO
                     if (conn.State == ConnectionState.Closed)
                     {
                         conn.Open();
-
-                        SqlDataReader sdReader = objCmd.ExecuteReader();
-
-                        while (sdReader.Read())
-                        {
-                            ClientePF cli = new ClientePF();
-
-
-                            int iConvert = 0;
-                            double dConvert = 0;
-                            DateTime dtConvert = DateTime.MinValue;
-
-
-                            if (sdReader["Cod_Cli"] != null)
-                            {
-                                cli.ID = int.TryParse(sdReader["Cod_Cli"].ToString(), out iConvert) ? iConvert : 0;
-                            }
-                            if (sdReader["Nome"] != null)
-                            {
-                                cli.Nome = sdReader["Nome"].ToString();
-                            }
-                            if (sdReader["Data_NascFund"] != null)
-                            {
-                                cli.DtNascFund = DateTime.TryParse(sdReader["Data_NascFund"].ToString(), out dtConvert) ? dtConvert : DateTime.MinValue;
-                            }
-                            if (sdReader["Renda_Lucro"] != null)
-                            {
-                                cli.Renda = double.TryParse(sdReader["Renda_Lucro"].ToString(), out dConvert) ? dConvert : 0;
-                            }
-                            if (sdReader["Sexo"] != null)
-                            {
-                                cli.Sexo = sdReader["Sexo"].ToString();
-                            }
-
-                            if (sdReader["Email"] != null)
-                            {
-                                cli.Email = sdReader["Email"].ToString();
-                            }
-                            if (sdReader["Endereco"] != null)
-                            {
-                                cli.Endereco = sdReader["Endereco"].ToString();
-                            }
-                            if (sdReader["Documento"] != null)
-                            {
-                                cli.CPF = sdReader["Documento"].ToString();
-                            }
-                            if (sdReader["Cod_TipoCli"] != null)
-                            {
-                                cli.cod_tp_Cliente = int.TryParse(sdReader["Cod_TipoCli"].ToString(), out iConvert) ? iConvert : 0;
-                                cli.TipoCliente = (TipoCliente) cli.cod_tp_Cliente;
-                            }
-
-                            lstCliente.Add(cli);
-                        }
                     }
+
+                    SqlDataReader sdReader = objCmd.ExecuteReader();
+
+                    while (sdReader.Read())
+                    {
+                        ClientePF cli = new ClientePF();
+
+
+                        int iConvert = 0;
+                        double dConvert = 0;
+                        DateTime dtConvert = DateTime.MinValue;
+
+
+                        if (sdReader["Cod_Cli"] != null)
+                        {
+                            cli.ID = int.TryParse(sdReader["Cod_Cli"].ToString(), out iConvert) ? iConvert : 0;
+                        }
+                        if (sdReader["Nome"] != null)
+                        {
+                            cli.Nome = sdReader["Nome"].ToString();
+                        }
+                        if (sdReader["Data_NascFund"] != null)
+                        {
+                            cli.DtNascFund = DateTime.TryParse(sdReader["Data_NascFund"].ToString(), out dtConvert) ? dtConvert : DateTime.MinValue;
+                        }
+                        if (sdReader["Renda_Lucro"] != null)
+                        {
+                            cli.Renda = double.TryParse(sdReader["Renda_Lucro"].ToString(), out dConvert) ? dConvert : 0;
+                        }
+                        if (sdReader["Sexo"] != null)
+                        {
+                            cli.Sexo = sdReader["Sexo"].ToString();
+                        }
+
+                        if (sdReader["Email"] != null)
+                        {
+                            cli.Email = sdReader["Email"].ToString();
+                        }
+                        if (sdReader["Endereco"] != null)
+                        {
+                            cli.Endereco = sdReader["Endereco"].ToString();
+                        }
+                        if (sdReader["Documento"] != null)
+                        {
+                            cli.CPF = sdReader["Documento"].ToString();
+                        }
+                        if (sdReader["Cod_TipoCli"] != null)
+                        {
+                            cli.cod_tp_Cliente = int.TryParse(sdReader["Cod_TipoCli"].ToString(), out iConvert) ? iConvert : 0;
+                            cli.TipoCliente = (TipoCliente)cli.cod_tp_Cliente;
+                        }
+
+                        lstCliente.Add(cli);
+                    }
+                    if(!sdReader.IsClosed)
+                    {
+                        sdReader.Close();
+                    }
+
 
                 }
                 catch (SqlException ex)

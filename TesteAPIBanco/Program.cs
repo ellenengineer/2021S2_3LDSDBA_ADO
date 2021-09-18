@@ -83,28 +83,6 @@ namespace TesteAPIBanco
                     Console.Write("Erro ao dar post cliente: " + response.ToString());
             }
 
-            /*  ClientePF cliPF = new ClientePF();
-              cliPF.ID = 4;
-              cliPF.
-
-              var postData = 
-              var postData = "{  'id': 4,  'tipoCliente': 1,  'cod_tp_Cliente': 0,  'nome': 'string',  'dtNascFund': '2021-09-15T01:16:47.377Z',  'email': 'string',  'endereco': 'string',  'cpf': 'string',  'renda': 0,  'sexo': 'string'  }";
-
-
-              var data = Encoding.ASCII.GetBytes(postData);
-              request.Method = "POST";
-              request.ContentType = "application/json";
-              request.ContentLength = data.Length;
-
-              using (var stream = request.GetRequestStream())
-              {
-                  stream.Write(data, 0, data.Length);
-              }
-
-              var response = (HttpWebResponse)request.GetResponse();
-              var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-
-              Console.WriteLine("A resposta do método POST é: " + responseString);*/
         }
 
         static void AtualizarCliente()
