@@ -6,22 +6,42 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class ContaInvestimento:Conta
+    public class ContaInvestimento : Conta
     {
 
         //relacionado ao Resgate
         public double Sacar(double valor)
         {
-           var SaldoAposSaque =  this.SaldoInicial -= valor;
-            return SaldoAposSaque;
+
+            if (valor > this.SaldoAtual)
+            {
+                throw new ArgumentOutOfRangeException("Saldo insuficiente");
+            }
+
+            if (valor < 0)
+            {
+                throw new ArgumentOutOfRangeException("Valor do saque não pode ser negativo");
+            }
+
+            var SaldoAtual = this.SaldoAtual -= valor;
+            return SaldoAtual;
         }
 
         //relacionado ao investimento
         public double Depositar(double valor)
         {
-            var SaldoAposDeposito = this.SaldoInicial += valor;
-            return SaldoAposDeposito;
+            if (valor < 0)
+            {
+                throw new ArgumentOutOfRangeException("Valor do depósito não pode ser negativo");
+            }
+            else
+            {
+                SaldoAtual = this.SaldoInicial += valor;
+            }
+
+            return SaldoAtual;
         }
+
 
         public double RenderJuros()
         {
@@ -31,7 +51,7 @@ namespace Model
         }
 
 
-    
+
         public ContaInvestimento RetornarCliente()
         {
             ContaInvestimento objCtaInvest = new ContaInvestimento();
